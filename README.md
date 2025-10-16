@@ -99,11 +99,48 @@ Response Example:
   }
 }
 
-✅ Notes
+🗄️ Database Setup (Day 3 - MongoDB)
 
-The backend uses Multer to handle file uploads and stores them in the uploads/ folder.
+Mongoose Schema Example:
+
+const mongoose = require('mongoose');
+
+const audioSchema = new mongoose.Schema({
+  filename: { type: String, required: true },
+  transcription: { type: String, default: '' },
+  uploadedAt: { type: Date, default: Date.now },
+});
+
+module.exports = mongoose.model('Audio', audioSchema);
+
+
+Collection name: audios
+
+Fields:
+
+filename — name stored on the server
+
+transcription — initially empty (updated later after conversion)
+
+uploadedAt — timestamp of upload
+
+Check uploaded files in MongoDB Atlas:
+
+Go to your cluster → Data Explorer.
+
+Open your database (e.g., speechToTextDB).
+
+Open the collection (audios) to see all uploaded records.
+
+✅ Notes / Day 3 Updates
+
+The backend uses Multer to handle file uploads and stores them in uploads/ folder.
+
+Uploaded files are also saved in MongoDB.
+
+Duplicate files in the uploads/ folder can be deleted without affecting the database.
 
 Use Postman to test API endpoints before connecting the frontend.
 
-Make sure the frontend runs on port 5173 and backend on 5000 (or .env configured).
+Make sure frontend runs on port 5173 and backend on 5000 (or adjust .env accordingly).
 ```
